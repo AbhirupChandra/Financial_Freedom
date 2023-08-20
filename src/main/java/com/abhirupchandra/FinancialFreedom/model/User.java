@@ -1,6 +1,7 @@
 package com.abhirupchandra.FinancialFreedom.model;
 
 import java.io.Serializable;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
 import javax.persistence.*;
@@ -40,6 +41,18 @@ public class User implements Serializable{
 	@Column(nullable = false)
 	private LocalDate dateOfBirth;
 
+	@Column(name = "mobile_number", unique = true)
+	@Pattern(regexp = "\\d{10}", message = "Mobile number must be a 10-digit number")
+	private String mobileNumber;
+	
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -68,9 +81,9 @@ public class User implements Serializable{
 		return password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+//	public void setPassword(String password) {
+//		this.password = password;
+//	}
 
 	public String getEncodedPassword() {
 		return encodedPassword;
